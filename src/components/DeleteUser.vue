@@ -7,11 +7,8 @@ export default {
   props: ["userid"],
   methods: {
     deleteUser() {
-      fetch("https://jsonplaceholder.typicode.com/posts/" + this.userid, {
-        method: "DELETE",
-      });
+      this.$emit("deleteUser", this.userid.id);
     },
   },
-  mounted() {},
 };
 </script>

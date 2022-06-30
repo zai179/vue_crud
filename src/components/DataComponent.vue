@@ -11,7 +11,10 @@
         <tr v-for="user in users" :key="user.id">
           <td>{{ user.id }}</td>
           <td>{{ user.title }}</td>
-          <td><deleteuser v-bind:userid="user.id" /></td>
+          <td>
+            <deleteuser :userid="user" @deleteUser="deleteData($event)" />
+            <edituser :userid="user" @Updateuser="updateData($event)" />
+          </td>
         </tr>
       </tbody>
     </table>
@@ -20,11 +23,13 @@
 <script>
 import adduser from "../components/AddUser.vue";
 import deleteuser from "./DeleteUser.vue";
+import edituser from "./EditUser.vue";
 import axios from "axios";
 export default {
   components: {
     adduser,
     deleteuser,
+    edituser,
   },
   data() {
     return {
@@ -39,10 +44,29 @@ export default {
           this.users = response.data;
         });
     },
+
+    deleteData(userid) {
+      // alert(userid);
+      fetch("https://jsonplaceholder.typicode.com/posts/" + userid, {
+        method: "DELETE",
+      }).then((response) => {
+        console.log(response);
+      });
+    },
+    updateData(id) {
+      fetch("https://jsonplaceholder.typicode.com/posts/" + id, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }).then((response) => {
+        this.form = "";
+        console.log(response);
+      });
+    },
   },
   mounted() {
     this.getData();
-    console.log("in data component");
   },
 };
 </script>
