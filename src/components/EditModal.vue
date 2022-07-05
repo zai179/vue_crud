@@ -5,7 +5,7 @@
         <label for="">User Name:</label>
         <input
           type="text"
-          name="user-name"
+          name="title"
           id=""
           v-model="form.title"
           class="form-control"
@@ -22,13 +22,13 @@ export default {
   props: ["users"],
   data() {
     return {
-      form: this.users,
+      form: {},
     };
   },
   methods: {
-    updateUser() {
-      this.$emit("updateuser", this.users.id);
-    },
+    // updateUser() {
+    //   this.$emit("updateuser", this.users.id);
+    // },
   },
 };
 </script>

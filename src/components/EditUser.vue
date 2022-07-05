@@ -4,7 +4,6 @@
       v-bind:users="userid"
       v-show="showModal"
       @close-modal="showModal = false"
-      @updateuser="UserUpdate"
     />
     <div class="save-btn">
       <button @click="showModal = true">Edit</button>
@@ -22,13 +21,12 @@ export default {
   data() {
     return {
       showModal: false,
-      id: this.userid.id,
     };
   },
   methods: {
-    UserUpdate() {
-      this.$emit("Updateuser", this.id);
-    },
+    // UserUpdate() {
+    //   this.$emit("Updateuser", this.id);
+    // },
   },
 };
 </script>

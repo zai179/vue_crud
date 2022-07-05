@@ -47,22 +47,21 @@ export default {
 
     deleteData(userid) {
       // alert(userid);
-      fetch("https://jsonplaceholder.typicode.com/posts/" + userid, {
-        method: "DELETE",
-      }).then((response) => {
-        console.log(response);
-      });
+      axios
+        .delete("https://jsonplaceholder.typicode.com/posts/" + userid)
+        .then((response) => {
+          let i = this.users.map((data) => data.id).indexOf(userid);
+          this.users.splice(i, 1);
+          console.log(response);
+        });
     },
     updateData(id) {
-      fetch("https://jsonplaceholder.typicode.com/posts/" + id, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }).then((response) => {
-        this.form = "";
-        console.log(response);
-      });
+      axios
+        .post("https://jsonplaceholder.typicode.com/posts/" + id)
+        .then((response) => {
+          this.form = "";
+          console.log(response);
+        });
     },
   },
   mounted() {
